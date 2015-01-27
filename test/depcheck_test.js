@@ -1,48 +1,26 @@
 'use strict';
 
 var grunt = require('grunt');
+var depcheck = require('../tasks/lib/depcheck').init();
+var path = require('path');
 
-/*
-  ======== A Handy Little Nodeunit Reference ========
-  https://github.com/caolan/nodeunit
-
-  Test methods:
-    test.expect(numAssertions)
-    test.done()
-  Test assertions:
-    test.ok(value, [message])
-    test.equal(actual, expected, [message])
-    test.notEqual(actual, expected, [message])
-    test.deepEqual(actual, expected, [message])
-    test.notDeepEqual(actual, expected, [message])
-    test.strictEqual(actual, expected, [message])
-    test.notStrictEqual(actual, expected, [message])
-    test.throws(block, [error], [message])
-    test.doesNotThrow(block, [error], [message])
-    test.ifError(value)
-*/
+var fixtures = path.join(__dirname, 'fixtures');
 
 exports.depcheck = {
-  setUp: function(done) {
-    // setup here if necessary
-    done();
+  testBad: function (test) {
+    depcheck.check(path.join(fixtures, 'bad'), {withoutDev: true}, function (unused) {
+      test.expect(2);
+      test.equal(1, unused.dependencies.length);
+      test.equal(0, unused.devDependencies.length);
+      test.done();
+    });
   },
-  default_options: function(test) {
-    test.expect(1);
-
-    var actual = grunt.file.read('tmp/default_options');
-    var expected = grunt.file.read('test/expected/default_options');
-    test.equal(actual, expected, 'should describe what the default behavior is.');
-
-    test.done();
-  },
-  custom_options: function(test) {
-    test.expect(1);
-
-    var actual = grunt.file.read('tmp/custom_options');
-    var expected = grunt.file.read('test/expected/custom_options');
-    test.equal(actual, expected, 'should describe what the custom option(s) behavior is.');
-
-    test.done();
-  },
+  testGood: function (test) {
+    depcheck.check(path.join(fixtures, 'good'), {withoutDev: true}, function (unused) {
+      test.expect(2);
+      test.equal(0, unused.dependencies.length);
+      test.equal(0, unused.devDependencies.length);
+      test.done();
+    });
+  }
 };

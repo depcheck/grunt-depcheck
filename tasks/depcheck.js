@@ -8,43 +8,43 @@
 
 'use strict';
 
-module.exports = function(grunt) {
+var path = require('path');
 
-  // Please see the Grunt documentation for more information regarding task
-  // creation: http://gruntjs.com/creating-tasks
+module.exports = function (grunt) {
+  var depcheck = require('./lib/depcheck').init();
 
-  grunt.registerMultiTask('depcheck', 'Depcheck Grunt plugin', function() {
-    // Merge task-specific and/or target-specific options with these defaults.
+  grunt.registerMultiTask('depcheck', 'Depcheck Grunt plugin', function () {
     var options = this.options({
-      punctuation: '.',
-      separator: ', '
+      'withoutDev': true,
+      'ignoreDirs': [],
+      'ingoreMatches': []
     });
 
-    // Iterate over all specified file groups.
-    this.files.forEach(function(f) {
-      // Concat specified files.
-      var src = f.src.filter(function(filepath) {
-        // Warn on and remove invalid source files (if nonull was set).
-        if (!grunt.file.exists(filepath)) {
-          grunt.log.warn('Source file "' + filepath + '" not found.');
-          return false;
-        } else {
-          return true;
+    var dirsChecked = 0;
+    var done = this.async();
+    var files = this.filesSrc;
+
+    files.forEach(function (f) {
+      depcheck.check(path.resolve(f), options, function (unused) {
+        if (unused.dependencies.length !== 0) {
+          grunt.log.warn('Unused Dependencies');
+          unused.dependencies.forEach(function (u) {
+            grunt.log.warn('* ' + u);
+          });
         }
-      }).map(function(filepath) {
-        // Read file source.
-        return grunt.file.read(filepath);
-      }).join(grunt.util.normalizelf(options.separator));
 
-      // Handle options.
-      src += options.punctuation;
+        if (unused.devDependencies.length !== 0) {
+          grunt.log.warn();
+          grunt.log.warn('Unused devDependencies');
+          unused.devDependencies.forEach(function (u) {
+            grunt.log.warn('* ' + u);
+          });
+        }
 
-      // Write the destination file.
-      grunt.file.write(f.dest, src);
-
-      // Print a success message.
-      grunt.log.writeln('File "' + f.dest + '" created.');
+        if (dirsChecked++ === files.length - 1) {
+          done();
+        }
+      });
     });
   });
-
 };
