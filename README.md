@@ -38,20 +38,20 @@ grunt.initConfig({
 ### Options
 
 #### options.withoutDev
-Type: `Boolean`
+Type: `Boolean`  
 Default value: `false`
 
 By default, `depcheck` looks at the devDependencies from the `package.json` file in order to look at unused dependencies. Set this to `true` and 
 it will look only at the `dependencies`.
 
 #### options.ignoreDirs
-Type: `Array`
+Type: `Array`  
 Default value: `[.git','.svn','.hg','.idea','node_modules','bower_components']`
 
 A list of directories to be ignored.
 
 #### options.ignoreMatches
-Type: `Array`
+Type: `Array`  
 Default value: `[]`
 
 Ignore dependencies that match these minimatch patterns. For example `grunt-*`
