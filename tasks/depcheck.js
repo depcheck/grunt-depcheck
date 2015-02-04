@@ -16,7 +16,7 @@ module.exports = function (grunt) {
   grunt.registerMultiTask('depcheck', 'Depcheck Grunt plugin', function () {
     var options = this.options({
       'withoutDev': false,
-      'ignoreDirs': [],
+      'ignoreDirs': ['.git','.svn','.hg','.idea','node_modules','bower_components'],
       'ingoreMatches': []
     });
 
