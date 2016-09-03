@@ -27,11 +27,7 @@ module.exports = function (grunt) {
     var files = this.filesSrc;
 
     files.forEach(function (f) {
-      depcheck.check(path.resolve(f), {
-        ignoreDirs: options.ignoreDirs,
-        ingoreMatches: options.ingoreMatches,
-        withoutDev: options.withoutDev
-      }, function (unused) {
+      depcheck.check(path.resolve(f), options, function (unused) {
         if (unused.dependencies.length !== 0) {
           fail = options.failOnUnusedDeps;
           grunt.log.warn('Unused Dependencies');
