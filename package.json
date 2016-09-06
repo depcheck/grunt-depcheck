@@ -39,6 +39,6 @@
     "gruntplugin"
   ],
   "dependencies": {
-    "depcheck": "^0.4.3"
+    "depcheck": "^0.6.4"
   }
 }
