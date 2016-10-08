@@ -1,7 +1,7 @@
 {
   "name": "grunt-depcheck",
   "description": "Depcheck Grunt plugin",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "homepage": "https://github.com/rumpl/grunt-depcheck",
   "author": {
     "name": "Djordje Lukic",
@@ -32,9 +32,6 @@
     "grunt-contrib-clean": "^0.5.0",
     "grunt-contrib-jshint": "^0.9.2",
     "grunt-contrib-nodeunit": "^0.3.3"
-  },
-  "peerDependencies": {
-    "grunt": "~0.4.5"
   },
   "keywords": [
     "gruntplugin"
