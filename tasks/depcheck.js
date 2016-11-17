@@ -47,7 +47,7 @@ module.exports = function (grunt) {
           });
         }
 
-        if (unused.missing.length !== 0) {
+        if (unused.missing && Object.keys(unused.missing).length !== 0) {
           fail = options.failOnMissingDeps;
           grunt.log.warn('Missing Dependencies');
           Object.keys(unused.missing).forEach(function (u) {
