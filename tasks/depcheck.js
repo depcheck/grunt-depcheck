@@ -17,6 +17,8 @@ module.exports = function (grunt) {
     var options = this.options({
       'withoutDev': false,
       'failOnUnusedDeps': false,
+      'failOnMissingDeps': false,
+      'listMissing': false,
       'ignoreDirs': ['.git','.svn','.hg','.idea','node_modules','bower_components'],
       'ingoreMatches': []
     });
@@ -31,8 +33,8 @@ module.exports = function (grunt) {
         if (unused.dependencies.length !== 0) {
           fail = options.failOnUnusedDeps;
           grunt.log.warn('Unused Dependencies');
-          unused.dependencies.forEach(function (u) {
-            grunt.log.warn('* ' + u);
+          unused.dependencies.forEach(function (unusedDependency) {
+            grunt.log.warn('* ' + unusedDependency);
           });
         }
 
@@ -40,8 +42,23 @@ module.exports = function (grunt) {
           fail = options.failOnUnusedDeps;
           grunt.log.warn();
           grunt.log.warn('Unused devDependencies');
-          unused.devDependencies.forEach(function (u) {
-            grunt.log.warn('* ' + u);
+          unused.devDependencies.forEach(function (unusedDevDependency) {
+            grunt.log.warn('* ' + unusedDevDependency);
+          });
+        }
+
+        if (unused.missing && Object.keys(unused.missing).length !== 0) {
+          fail = options.failOnMissingDeps;
+          grunt.log.warn();
+          grunt.log.warn('Missing Dependencies');
+          Object.keys(unused.missing).forEach(function (missingDependency) {
+            var warnString = '* ' + missingDependency;
+            if (options.listMissing) {
+              unused.missing[missingDependency].forEach(function (missingDependencyFile) {
+                warnString += '\n  in ' + missingDependencyFile;
+              });
+            }
+            grunt.log.warn(warnString);
           });
         }
 

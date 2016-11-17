@@ -41,7 +41,7 @@ grunt.initConfig({
 Type: `Boolean`  
 Default value: `false`
 
-By default, `depcheck` looks at the devDependencies from the `package.json` file in order to look at unused dependencies. Set this to `true` and 
+By default, `depcheck` looks at the devDependencies from the `package.json` file in order to look at unused dependencies. Set this to `true` and
 it will look only at the `dependencies`.
 
 #### options.ignoreDirs
@@ -56,5 +56,25 @@ Default value: `[]`
 
 Ignore dependencies that match these minimatch patterns. For example `grunt-*`
 
+#### options.failOnUnusedDeps
+Type: `Boolean`  
+Default value: `false`
+
+Set this to `true` to make unused dependencies respond as a failure in Grunt.
+
+#### options.failOnMissingDeps
+Type: `Boolean`  
+Default value: `false`
+
+Set this to `true` to make missing dependencies respond as a failure in Grunt.
+
+#### options.listMissing
+Type: `Boolean`  
+Default value: `false`
+
+By default, only the names of packages that are used but not set in the `package.json` will be included in the Grunt output. Set this to `true`
+and the Grunt output will also list all the files where the missing dependency is being used.
+
 ## Contributing
 In lieu of a formal styleguide, take care to maintain the existing coding style. Add unit tests for any new or changed functionality. Lint and test your code using [Grunt](http://gruntjs.com/).
+
