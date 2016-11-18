@@ -1,5 +1,9 @@
 # grunt-depcheck
 
+[![Build Status](https://travis-ci.org/depcheck/grunt-depcheck.svg?branch=master)](https://travis-ci.org/depcheck/grunt-depcheck)
+[![dependencies Status](https://david-dm.org/depcheck/grunt-depcheck/status.svg)](https://david-dm.org/depcheck/grunt-depcheck)
+[![devDependencies Status](https://david-dm.org/depcheck/grunt-depcheck/dev-status.svg)](https://david-dm.org/depcheck/grunt-depcheck?type=dev)
+
 > Depcheck Grunt plugin
 
 ## Getting Started
