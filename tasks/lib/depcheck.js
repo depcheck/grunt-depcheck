@@ -1,11 +1,3 @@
-/*
- * grunt-depcheck
- * https://github.com/rumpl/grunt-depcheck
- *
- * Copyright (c) 2015 Djordje Lukic
- * Licensed under the MIT license.
- */
-
 'use strict';
 
 var depcheck = require('depcheck');
