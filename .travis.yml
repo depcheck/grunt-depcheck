@@ -3,10 +3,9 @@ sudo: false
 language: node_js
 
 node_js:
-  - 0.12
-  - 4
-  - 6
-  - 7
+  - 8
+  - 10
+  - 12
 
 script:
   - npm run test
@@ -22,11 +21,11 @@ deploy:
       secure: StcT8gQfJW0nipD0H1fnFrxkl/VijNproaJ/EFg5AJuFtIdsn4OFein03+MYsTg6w1j9V2m8gVhCRD0dvgvCYtnbznoyqEoIf06ws2vHNYlnelPneZDMhsjaxMVnRcOvttUxAYkVJQ8Bn26scnDLwkuiJfNhyBX0hieMMD/IfOI=
     on:
       tags: true
-      node: 6
+      node: 10
   - provider: releases
     skip_cleanup: true
     api_key:
       secure: S9ZDp1V/NAFAPRfJbwiE3++ML5+l9gqQ6NuVLPqQR5qffOzax72mL/sBQUZCVRAw7W8mPCW24FK42KdFgDRCRA9ydCqhoUYAOpS0uQHqhiYFfnoIm6UbKEJ6lMnA3xir15+4JF3iU+Vwag9HMSIw8yOyp1CPBNT9YVYw+mEeIz0=
     on:
       tags: true
-      node: 6
+      node: 10
